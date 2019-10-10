@@ -2,17 +2,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 
+//how to handle simply for a known amount of numbers? i.e. before the for loop
 public class StringCalc {
-    //how to handle simply for a known amount of numbers? i.e. before the for loop
-    //        “//;\n1;2” == 3
     String negatives = "";
 
     public int add(String input) throws Exception {
         int sum = 0;
         if (input.equals("")) return sum;
-        List<String> lines = splitLine(input);
+        List<String> lines = splitLines(input, "\n");
 
         String currentDelimiter = ",";
+
         for (String line : lines) {
             if (line.startsWith("//")) currentDelimiter = getDelimiter(line);
             else sum += addLine(line, currentDelimiter);
@@ -22,22 +22,21 @@ public class StringCalc {
     }
 
     private String getDelimiter(String line) {
+        // //[***]
+        // 1***2***3
 
-        return ";";
-    }
+        if (line.contains("[")) {
+            int endDelimiter = line.indexOf("]");
+            String currentDelimiter = line.substring(3, endDelimiter);
+        }
+        String currentDelimiter = line.substring(2);
 
-    private List<String> splitLine(String input) throws Exception {
-
-        List<String> lines = new ArrayList<>();
-        StringTokenizer tokenizer = new StringTokenizer(input, "\n");
-        while (tokenizer.hasMoreTokens()) lines.add(tokenizer.nextToken());
-
-        return lines;
+        return currentDelimiter;
     }
 
     private int addLine(String input, String currentDelimiter) throws Exception {
         int sum = 0;
-        List<String> arrayNum = stringToArray(input, currentDelimiter);
+        List<String> arrayNum = splitLines(input, currentDelimiter);
 
         for (int i = 0; i < arrayNum.size(); i++) {
             String value = arrayNum.get(i);
@@ -52,29 +51,16 @@ public class StringCalc {
     }
 
 
-
-
-    public List<String> stringToArray(String input, String currentDelimiter) {
-//        arrayNum = input.split(",|\\n|;|:");
+    public List<String> splitLines(String input, String currentDelimiter) {
 
         List<String> list = new ArrayList<>();
 
-            StringTokenizer tokenizer = new StringTokenizer(input, currentDelimiter);
-            while (tokenizer.hasMoreTokens()) list.add(tokenizer.nextToken());
-
+        StringTokenizer tokenizer = new StringTokenizer(input, currentDelimiter);
+        while (tokenizer.hasMoreTokens()) list.add(tokenizer.nextToken());
 
         return list;
     }
 
-//    public String changeDelimiter(String input) {
-//        //[***]\n1***2***3
-//
-//
-//        int startDelimiter = input.indexOf("//");
-//        int endDelimiter = input.indexOf("\n");
-//        String delimiter = input.substring(startDelimiter + 2, endDelimiter);
-//        return delimiter;
-//    }
 
 //    public int convertToNumbers(String input) {
 //        int numbers= Integer.parseInt(input);

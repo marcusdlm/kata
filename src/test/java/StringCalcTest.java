@@ -60,8 +60,8 @@ public class StringCalcTest {
 
     @Test
     public void delimiterAnyLength() throws Exception {
-//        Assert.assertEquals(6, input.add("//[***]\n1***2***3"));
-        Assert.assertEquals(6, input.add("//;\n1;2;3"));
+        Assert.assertEquals(6, input.add("//[***]\n1***2***3"));
+//        Assert.assertEquals(6, input.add("//;\n1;2;3"));
     }
 
 }
