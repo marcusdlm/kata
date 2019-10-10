@@ -30,7 +30,7 @@ public class StringCalcTest {
     @Test
     public void differentDelimiter() throws Exception {
 //        “//;\n1;2” == 3
-        Assert.assertEquals(3, input.add("//;\n1:2"));
+        Assert.assertEquals(3, input.add("//:\n1:2"));
     }
 
     @Test
