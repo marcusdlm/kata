@@ -19,19 +19,17 @@ public class StringCalc {
         }
 
         return sum;
+//        getCalledCount();
     }
 
     private String getDelimiter(String line) {
-        // //[***]
-        // 1***2***3
 
         if (line.contains("[")) {
-            int endDelimiter = line.indexOf("]");
-            String currentDelimiter = line.substring(3, endDelimiter);
+            String strippedDelimiter = line.replace("]", "");
+            String delimiters = strippedDelimiter.replace("[","|");
+            return delimiters.substring(3);
         }
-        String currentDelimiter = line.substring(2);
-
-        return currentDelimiter;
+        return line.substring(2);
     }
 
     private int addLine(String input, String currentDelimiter) throws Exception {
@@ -40,8 +38,7 @@ public class StringCalc {
 
         for (int i = 0; i < arrayNum.size(); i++) {
             String value = arrayNum.get(i);
-            if (!value.equals("") && Integer.valueOf(value) < 1000) sum = sum + Integer.valueOf(value);
-            else i = i++;
+            if ( Integer.valueOf(value) < 1000) sum = sum + Integer.valueOf(value);
 
             if (value.contains("-")) negatives = negatives + value;
         }
@@ -71,5 +68,9 @@ public class StringCalc {
         if (negatives.contains("-"))
             throw new Exception("negatives not allowed, " + negatives);
     }
+
+//    public int getCalledCount() {
+//
+//    }
 
 }

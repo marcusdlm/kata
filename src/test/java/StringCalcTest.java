@@ -64,4 +64,19 @@ public class StringCalcTest {
 //        Assert.assertEquals(6, input.add("//;\n1;2;3"));
     }
 
+    @Test
+    public void multipleDelimiter() throws Exception {
+        Assert.assertEquals(6, input.add("//[*][%]\n1*2%3"));
+    }
+
+    @Test
+    public void multipleLongDelimiter() throws Exception {
+        Assert.assertEquals(6, input.add("//[**][%%]\n1**2%%3"));
+    }
+
+//    @Test
+//    public void howManyTimesAddInvoked() throws Exception {
+//        Assert.assertEquals(3, input.add("1,2,3"));
+//    }
+
 }
